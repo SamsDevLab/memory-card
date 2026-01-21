@@ -1,9 +1,9 @@
 import "../stylesheets/scoreboard.css";
 
-function Scoreboard() {
+function Scoreboard({ counter }) {
   return (
     <section className="scoreboard">
-      <h2>Score: </h2>
+      <h2>Score: {counter.current}</h2>
       <h2>Best Score: </h2>
     </section>
   );

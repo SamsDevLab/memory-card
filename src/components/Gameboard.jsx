@@ -1,11 +1,15 @@
 import "../stylesheets/gameboard.css";
 import Character from "./Character.jsx";
 
-function Gameboard({ charactersArr }) {
+function Gameboard({ charactersArr, onClick }) {
   return (
     <section className="gameboard">
       {charactersArr.map((character) => (
-        <Character key={character.id} characterProfile={character} />
+        <Character
+          key={character.id}
+          characterProfile={character}
+          onClick={onClick}
+        />
       ))}
     </section>
   );
