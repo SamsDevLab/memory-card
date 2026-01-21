@@ -2,13 +2,13 @@ const charactersArr = [
   {
     id: crypto.randomUUID(),
     name: "Stanley Ipkiss",
-    bio: "Shy, unlucky, and mild-mannered bank clerk who transforms into a chaotic, green-faced, cartoonish trickster when he puts on a magical mask, gaining incredible powers to wreak havoc, exact revenge, and live out his wildest, most unrestrained desires.",
+    bio: "Shy, unlucky, bank clerk who transforms into a chaotic, green-faced, cartoonish trickster when he puts on a magical mask",
     image: "",
   },
   {
     id: crypto.randomUUID(),
     name: "Charlie Baileygates aka Hank Evans",
-    bio: "Mild-mannered Rhode Island State Trooper who develops a violent, aggressive split personality named Hank Evans (Henry Evans) to cope with stress, leading him to commit various crimes and cause chaos while unknowingly being controlled by Hank, a chaotic alter-ego with a desire to hurt people and manipulate women",
+    bio: "Mild-mannered State Trooper who develops a violent, aggressive split personality named Hank Evans (Henry Evans) to cope with stress",
     image: "",
   },
   {
@@ -20,25 +20,25 @@ const charactersArr = [
   {
     id: crypto.randomUUID(),
     name: "Edward Nygma aka The Riddler",
-    bio: "Eccentric, rejected Wayne Enterprises scientist obsessed with Bruce Wayne, transforming into a flamboyant villain who uses mind-bending puzzles and his 'Box' invention to force Batman to reveal his identity and prove his intellectual superiority",
+    bio: "Eccentric, rejected Wayne Enterprises scientist obsessed with Bruce Wayne, transforming into a flamboyant villain",
     image: "",
   },
   {
     id: crypto.randomUUID(),
     name: "Chip Douglas aka The Cable Guy",
-    bio: "Mentally unstable cable installer who gets obssessed with one of his customers, Steven Kovacs. After his numerous friendship advances get turned down by Steven, Chip ends up becoming a fully-fledged stalker, hellbent on destroying Steven's life",
+    bio: "Mentally unstable cable installer who gets obssessed with, and ends up stalking one of his customers",
     image: "",
   },
   {
     id: crypto.randomUUID(),
     name: "Lloyd Christmas",
-    bio: "Dim-witted, immature, but good-hearted limo driver who embarks on chaotic cross-country adventures with his best friend Harry Dunne. Known for his signature chipped tooth and romantic infatuation with Mary Swanson. ",
+    bio: "Dim-witted, immature, but good-hearted limo driver who embarks on chaotic cross-country adventures with his best friend Harry Dunne",
     image: "",
   },
   {
     id: crypto.randomUUID(),
     name: "Fletcher Reede",
-    bio: "Fast-talking, habitually lying defense attorney whose career built on deceit is upended when his son Max wishes for him to be unable to lie for 24 hours. His inability to lie throws his successful, but morally compromised, career into chaos and highlights his failures as a father",
+    bio: "Fast-talking, habitually lying defense attorney. His son, Max, wishes his father would lose the ability to lie, and Max's wish is granted",
     image: "",
   },
   {
@@ -48,15 +48,15 @@ const charactersArr = [
     image: "",
   },
   {
-    id: "crypto.randomUUID()",
+    id: crypto.randomUUID(),
     name: "Fire Marshal Bill",
-    bio: "Popular, clumsy, and accident-prone fire safety inspector. Enthusiastically inspects homes for fire hazards, often causing more destruction with his well-meaning but disastrous attempts to demonstrate fire safety, much to the horror of homeowners.",
+    bio: "Accident-prone fire safety inspector who inspects homes for fire hazards, often causing more destruction with his well-meaning but disastrous attempts to demonstrate fire safety",
     image: "",
   },
   {
-    id: "crypto.randomUUID()",
+    id: crypto.randomUUID(),
     name: "Truman Burbank",
-    bio: "Insurance salesman whose entire life, from birth, has been a massive reality TV show, broadcast globally without his knowledge, featuring paid actors as his family and friends in a fabricated island town called Seahaven. He gradually uncovers the elaborate deception and attempts to escape his artificial world",
+    bio: "Salesman whose entire life has been a massive reality TV show, broadcast globally without his knowledge. He gradually uncovers the deception and attempts to escape his artificial world",
     image: "",
   },
 ];
