@@ -28,11 +28,27 @@ h6 {
   text-wrap: balance;
 }
 
+h1 {
+  font-family: "Audiowide";
+  color: #39ff14;
+  font-size: 3rem;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Inter 18pt";
+}
+
 p,
 li,
 figcaption {
   text-wrap: pretty;
   max-width: 65ch;
+  font-family: "Inter 18pt";
+  font-size: 1rem;
 }
 
 img,
@@ -48,4 +64,24 @@ textarea,
 button,
 select {
   font: inherit;
+}
+
+@font-face {
+  font-family: "Audiowide";
+  src:
+    url("./memory-card-fonts/Audiowide-Regular.woff2") format("woff2"),
+    url("./memory-card-fonts/Audiowide-Regular.woff") format("woff");
+  /* font-weight: normal;
+  font-style: normal;
+  font-display: swap; */
+}
+
+@font-face {
+  font-family: "Inter 18pt";
+  src:
+    url("./memory-card-fonts/Inter18pt-Regular.woff2") format("woff2"),
+    url("./memory-card-fonts/Inter18pt-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
