@@ -1,0 +1,10 @@
+.scoreboard {
+  background-color: #1a1f4a;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+h2 {
+  color: #e6e8f2;
+  font-size: 2rem;
+}

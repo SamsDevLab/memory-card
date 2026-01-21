@@ -2,7 +2,9 @@
   min-height: 90vh;
   min-width: 90vw;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 h1 {

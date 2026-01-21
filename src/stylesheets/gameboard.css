@@ -1,0 +1,5 @@
+.gameboard {
+  min-height: 65vh;
+  min-width: 75vw;
+  border: 5px solid #1a1f4a;
+}
