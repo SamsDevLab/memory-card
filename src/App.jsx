@@ -1,5 +1,6 @@
 import "./App.css";
-import { useRef } from "react";
+// import { useRef } from "react";
+import { useState } from "react";
 import charactersArr from "./data";
 import Scoreboard from "./components/Scoreboard";
 import Gameboard from "./components/Gameboard";
@@ -7,16 +8,17 @@ import Gameboard from "./components/Gameboard";
 // console.log(charactersArr);
 
 function App() {
-  const counter = useRef(0);
+  const [scoreCounter, setScoreCounter] = useState(0);
 
   const handleCardClick = () => {
     console.log("This card has been clicked!");
+    setScoreCounter(scoreCounter + 1);
   };
 
   return (
     <main className="main-container">
       <h1>Jim Carrey Memory Game </h1>
-      <Scoreboard counter={counter} />
+      <Scoreboard scoreCounter={scoreCounter} />
       <Gameboard charactersArr={charactersArr} onClick={handleCardClick} />
     </main>
   );
