@@ -1,25 +1,31 @@
 import "./App.css";
-// import { useRef } from "react";
+
 import { useState } from "react";
-import charactersArr from "./data";
+import movieCharacters from "./data";
 import Scoreboard from "./components/Scoreboard";
 import Gameboard from "./components/Gameboard";
 
 // console.log(charactersArr);
 
 function App() {
-  const [scoreCounter, setScoreCounter] = useState(0);
+  // const [scoreCounter, setScoreCounter] = useState(0);
+  const [movieCharactersObjs, setMovieCharactersObjs] =
+    useState(movieCharacters);
 
-  const handleCardClick = () => {
-    console.log("This card has been clicked!");
-    setScoreCounter(scoreCounter + 1);
+  const handleCardClick = (characterProfile) => {
+    console.log(characterProfile);
+    // setScoreCounter(scoreCounter + 1);
   };
 
   return (
     <main className="main-container">
       <h1>Jim Carrey Memory Game </h1>
-      <Scoreboard scoreCounter={scoreCounter} />
-      <Gameboard charactersArr={charactersArr} onClick={handleCardClick} />
+      {/* <Scoreboard scoreCounter={scoreCounter} /> */}
+      <Scoreboard />
+      <Gameboard
+        movieCharacters={movieCharactersObjs}
+        onClick={handleCardClick}
+      />
     </main>
   );
 }
@@ -30,9 +36,6 @@ export default App;
 App Design Ideas:
 
 Components Needed
-
-After lunch: make a data.js file and start playing around with the objects structures and
-delivering that data to the Gameboard
 
 Scoreboard:
   • Possibly need a counter on card objects
@@ -48,6 +51,10 @@ Scoreboard:
   • Cards component
     • GameBoard will need to implement useEffect() to re-call the API after click
 
+  Needs for the onClick (when a card is actually clicked):
+  • Update 'clicked' to 'true' to ensure that the card cannot be clicked again
+    • If a card is 'clicked' and it's already set to true the game ends and the best score is updated
+  • Update Score
 
   Jim Carrey API characters
 

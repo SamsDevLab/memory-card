@@ -1,10 +1,10 @@
 import "../stylesheets/gameboard.css";
 import Card from "./Card.jsx";
 
-function Gameboard({ charactersArr, onClick }) {
+function Gameboard({ movieCharacters, onClick }) {
   return (
     <section className="gameboard">
-      {charactersArr.map((character) => (
+      {movieCharacters.map((character) => (
         <Card
           key={character.id}
           characterProfile={character}
