@@ -1,31 +1,64 @@
 import "./App.css";
 
 import { useState } from "react";
-import movieCharacters from "./data";
+import movieCharactersObjs from "./data";
 import Scoreboard from "./components/Scoreboard";
 import Gameboard from "./components/Gameboard";
 
-// console.log(charactersArr);
-
 function App() {
-  // const [scoreCounter, setScoreCounter] = useState(0);
-  const [movieCharactersObjs, setMovieCharactersObjs] =
-    useState(movieCharacters);
+  const [movieCharacters, setMovieCharacters] = useState(movieCharactersObjs);
+
+  console.log(movieCharacters);
+
+  const updateTrueValues = (characterProfile) => {
+    const updatedArr = movieCharacters.map((character) => {
+      if (character.id === characterProfile.id) {
+        return { ...characterProfile, clicked: true };
+      }
+
+      return { ...character };
+    });
+
+    return updatedArr;
+  };
+
+  const shuffleCards = (arr) => {
+    let currentIndex = arr.length,
+      randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [arr[currentIndex], arr[randomIndex]] = [
+        arr[randomIndex],
+        arr[currentIndex],
+      ];
+    }
+
+    return arr;
+  };
 
   const handleCardClick = (characterProfile) => {
-    console.log(characterProfile);
-    // setScoreCounter(scoreCounter + 1);
+    const updatedArr = updateTrueValues(characterProfile);
+    const shuffledArr = shuffleCards(updatedArr);
+
+    setMovieCharacters(shuffledArr);
+
+    /*
+      Needs to:
+        • Set characterProfile.clicked to true through helper, return new array
+        • Shuffle the array
+        • Re-call the fetch API
+        • Call setMovieCharacters with new array to update status
+    */
   };
 
   return (
     <main className="main-container">
       <h1>Jim Carrey Memory Game </h1>
-      {/* <Scoreboard scoreCounter={scoreCounter} /> */}
-      <Scoreboard />
-      <Gameboard
-        movieCharacters={movieCharactersObjs}
-        onClick={handleCardClick}
-      />
+      <Scoreboard movieCharacters={movieCharacters} />
+      <Gameboard movieCharacters={movieCharacters} onClick={handleCardClick} />
     </main>
   );
 }
@@ -38,10 +71,7 @@ App Design Ideas:
 Components Needed
 
 Scoreboard:
-  • Possibly need a counter on card objects
-    • When a card object is clicked, the counter increases to 1
-    • If a counter goes above 1, this means the card has been clicked twice
-    • If that happens, the player loses the game
+
 
   GameBoard:
   • Holds cards in component - organizes them via grid

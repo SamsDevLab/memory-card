@@ -1,4 +1,4 @@
-const movieCharacters = [
+const movieCharactersObjs = [
   {
     id: crypto.randomUUID(),
     name: "Stanley Ipkiss",
@@ -71,4 +71,4 @@ const movieCharacters = [
   },
 ];
 
-export default movieCharacters;
+export default movieCharactersObjs;
