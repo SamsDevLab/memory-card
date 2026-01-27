@@ -1,36 +1,46 @@
 import "./App.css";
 import { useState } from "react";
+import { useRef } from "react";
 import { useEffect } from "react";
 import movieCharactersObjs from "./data";
 import Scoreboard from "./components/Scoreboard";
 import Gameboard from "./components/Gameboard";
 
 function App() {
-  const [movieCharacters, setMovieCharacters] = useState([]);
+  const [movieCharacters, setMovieCharacters] = useState(movieCharactersObjs);
+  const [score, setCurrentScore] = useState(0);
+  const scoreKeeper = useRef(0);
 
-  useEffect(() => {
-    const apiKey = "NIXqVHbCyD2vlaPwIj5ivAPp5IbUJHxl";
+  // Commented out when maxed out on API requests:
+  // useEffect(() => {
+  //   const apiKey = "NIXqVHbCyD2vlaPwIj5ivAPp5IbUJHxl";
+  //   const newCharacterArr = movieCharactersObjs.map(async (character) => {
+  //     try {
+  //       const response = await fetch(
+  //         `https://api.giphy.com/v1/gifs/${character.id}?api_key=${apiKey}`,
+  //       ).then((result) => result.json());
+  //       const newImage = response.data.images.original_still.url;
+  //       return { ...character, image: newImage };
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   });
+  //   Promise.all(newCharacterArr).then((results) => setMovieCharacters(results));
+  // }, []);
 
-    const newCharacterArr = movieCharactersObjs.map(async (character) => {
-      try {
-        const response = await fetch(
-          `https://api.giphy.com/v1/gifs/${character.id}?api_key=${apiKey}`,
-        ).then((result) => result.json());
-        console.log(response);
-        const newImage = response.data.images.original_still.url;
-        return { ...character, image: newImage };
-      } catch (error) {
-        console.log(error);
-      }
-    });
+  const updateScore = () => {
+    scoreKeeper.current = scoreKeeper.current + 1;
+    setCurrentScore(scoreKeeper.current);
+  };
 
-    Promise.all(newCharacterArr).then((results) => setMovieCharacters(results));
-  }, []);
+  const gameOver = () => {
+    console.log("You lose, sucka!");
+  };
 
   const updateTrueValues = (characterProfile) => {
     const updatedArr = movieCharacters.map((character) => {
       if (character.id === characterProfile.id) {
-        return { ...characterProfile, clicked: true };
+        return { ...character, clicked: true };
       }
 
       return { ...character };
@@ -57,55 +67,29 @@ function App() {
   };
 
   function handleCardClick(characterProfile) {
-    const updatedArr = updateTrueValues(characterProfile);
-    const shuffledMovieCharacters = shuffleCards(updatedArr);
+    if (characterProfile.clicked === true) {
+      gameOver();
+    } else {
+      // Real:
+      // const updatedArr = updateTrueValues(characterProfile);
+      // const shuffledMovieCharacters = shuffleCards(updatedArr);
 
-    setMovieCharacters(shuffledMovieCharacters);
+      // Test:
+      const updatedArr = updateTrueValues(characterProfile);
+      console.log(updatedArr);
+      const shuffledMovieCharacters = shuffleCards(updatedArr);
+      updateScore();
+      setMovieCharacters(shuffledMovieCharacters);
+    }
   }
 
   return (
     <main className="main-container">
       <h1>Jim Carrey Memory Game </h1>
-      <Scoreboard movieCharacters={movieCharacters} />
+      <Scoreboard score={score} />
       <Gameboard movieCharacters={movieCharacters} onClick={handleCardClick} />
     </main>
   );
 }
 
 export default App;
-
-/* 
-App Design Ideas:
-
-Components Needed
-
-Scoreboard:
-
-
-  GameBoard:
-  • Holds cards in component - organizes them via grid
-  • Click Fn 
-    • When clicking a card, cards will randomize
-    • This will probably need to pass down as a prop to “Cards” component
-  • Cards component
-    • GameBoard will need to implement useEffect() to re-call the API after click
-
-  Needs for the onClick (when a card is actually clicked):
-  • Update 'clicked' to 'true' to ensure that the card cannot be clicked again
-    • If a card is 'clicked' and it's already set to true the game ends and the best score is updated
-  • Update Score
-
-  Jim Carrey API characters
-
-  ✅ 1. The Mask
-  ✅ 2. The Cable Guy
-  ✅ 3. Riddler
-  ✅ 4. Dumb and Dumber
-  ✅ 5. Me, Myself, and Irene
-  ✅ 6. Ace Ventura
-  ✅ 7. Liar, Liar
-  ✅ 8. The Grinch
-  ✅ 9. Fire Marshall Bill
-  ✅ 10. The Truman Show
-
-*/
