@@ -14,11 +14,10 @@ function App() {
     const newCharacterArr = movieCharactersObjs.map(async (character) => {
       try {
         const response = await fetch(
-          `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&limit=1&q=${character.id}`,
+          `https://api.giphy.com/v1/gifs/${character.id}?api_key=${apiKey}`,
         ).then((result) => result.json());
         console.log(response);
-        const newImage = response.data[0].images.original_still.url;
-        // console.log(newImage);
+        const newImage = response.data.images.original_still.url;
         return { ...character, image: newImage };
       } catch (error) {
         console.log(error);
@@ -61,9 +60,7 @@ function App() {
     const updatedArr = updateTrueValues(characterProfile);
     const shuffledMovieCharacters = shuffleCards(updatedArr);
 
-    const result = fetchData();
-    result.then((value) => value.json().then((obj) => console.log(obj)));
-    const shuffledArr = shuffleCards({ ...movieCharacters });
+    setMovieCharacters(shuffledMovieCharacters);
   }
 
   return (
