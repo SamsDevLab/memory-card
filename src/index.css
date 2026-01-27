@@ -29,7 +29,7 @@ h6 {
 }
 
 h1 {
-  font-family: "Audiowide";
+  font-family: "Audiowide", system-ui, sans-serif;
   color: #39ff14;
   font-size: 3rem;
 }
@@ -39,7 +39,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Inter 18pt";
+  font-family: "Inter 18pt", system-ui, sans-serif;
 }
 
 p,
@@ -47,7 +47,7 @@ li,
 figcaption {
   text-wrap: pretty;
   max-width: 65ch;
-  font-family: "Inter 18pt";
+  font-family: "Inter 18pt", system-ui, sans-serif;
   font-size: 1rem;
 }
 
