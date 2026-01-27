@@ -1,14 +1,32 @@
 import "./App.css";
-
 import { useState } from "react";
+import { useEffect } from "react";
 import movieCharactersObjs from "./data";
 import Scoreboard from "./components/Scoreboard";
 import Gameboard from "./components/Gameboard";
 
 function App() {
-  const [movieCharacters, setMovieCharacters] = useState(movieCharactersObjs);
+  const [movieCharacters, setMovieCharacters] = useState([]);
 
-  console.log(movieCharacters);
+  useEffect(() => {
+    const apiKey = "NIXqVHbCyD2vlaPwIj5ivAPp5IbUJHxl";
+
+    const newCharacterArr = movieCharactersObjs.map(async (character) => {
+      try {
+        const response = await fetch(
+          `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&limit=1&q=${character.id}`,
+        ).then((result) => result.json());
+        console.log(response);
+        const newImage = response.data[0].images.original_still.url;
+        // console.log(newImage);
+        return { ...character, image: newImage };
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+    Promise.all(newCharacterArr).then((results) => setMovieCharacters(results));
+  }, []);
 
   const updateTrueValues = (characterProfile) => {
     const updatedArr = movieCharacters.map((character) => {
@@ -39,20 +57,14 @@ function App() {
     return arr;
   };
 
-  const handleCardClick = (characterProfile) => {
+  function handleCardClick(characterProfile) {
     const updatedArr = updateTrueValues(characterProfile);
-    const shuffledArr = shuffleCards(updatedArr);
+    const shuffledMovieCharacters = shuffleCards(updatedArr);
 
-    setMovieCharacters(shuffledArr);
-
-    /*
-      Needs to:
-        • Set characterProfile.clicked to true through helper, return new array
-        • Shuffle the array
-        • Re-call the fetch API
-        • Call setMovieCharacters with new array to update status
-    */
-  };
+    const result = fetchData();
+    result.then((value) => value.json().then((obj) => console.log(obj)));
+    const shuffledArr = shuffleCards({ ...movieCharacters });
+  }
 
   return (
     <main className="main-container">
