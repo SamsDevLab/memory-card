@@ -27,11 +27,15 @@ function App() {
         const newImage = response.data.images.original_still.url;
         return { ...character, image: newImage };
       } catch (error) {
-        console.log(error);
+        console.error(
+          "Too many API calls at this time, using fallback:",
+          error,
+        );
+        return { ...character, image: "src/assets/mask-api-error.png" };
       }
     });
     Promise.all(newCharacterArr).then((results) => setMovieCharacters(results));
-  }, []); //bestScore
+  }, [bestScore]); //
 
   const updateScore = () => {
     scoreKeeper.current = scoreKeeper.current + 1;
