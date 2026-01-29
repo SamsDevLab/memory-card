@@ -4,7 +4,15 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 1rem;
+}
+
+.header-and-board {
+  min-width: 80%;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  margin: 2rem 0 1.25rem 0;
 }
 
 .modal {
@@ -15,29 +23,32 @@
   gap: 1.5rem;
   background: #1a1f4a;
   position: absolute;
-  top: 32.5%;
+  top: 18%;
   left: 26.75%;
   min-height: 50%;
   min-width: 45%;
-  border: 1px solid #6bff9a;
-  box-shadow: 0 0 30px rgba(107, 255, 154, 0.45);
+  border: none;
   border-radius: 0.2rem;
+  box-shadow: 0 0 2rem 0.2rem #39ff14;
 }
 
 .modal h3 {
   font-size: 3rem;
-  color: #6bff9a;
   color: #39ff14;
+  font-family: "Audiowide";
 }
 
 .modal button {
   font-size: 1.5rem;
   padding: 0.75rem;
   background-color: #39ff14;
+  color: #1a1f4a;
   border: none;
   border-radius: 0.2rem;
+  font-family: "Inter 18pt";
 }
 
 .modal button:hover {
   background-color: #6bff9a;
+  cursor: pointer;
 }
