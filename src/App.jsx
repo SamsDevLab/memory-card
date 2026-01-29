@@ -8,6 +8,15 @@ import Scoreboard from "./components/Scoreboard";
 import Gameboard from "./components/Gameboard";
 import GameOver from "./components/GameOver";
 
+/*
+Requirements before its finished:
+
+• Add alternative text to modal if user wins (makes it to 10)
+• Adjust text when resizing the window (it overflows the cards right now)
+• Add media queries for responsiveness on mobile devices
+• Lock the board when the user wins/loses. Right now you can still click on cards
+*/
+
 function App() {
   const [movieCharacters, setMovieCharacters] = useState(movieCharactersObjs);
   const [score, setCurrentScore] = useState(0);
@@ -111,9 +120,15 @@ function App() {
 
   return (
     <main className="main-container">
-      <h1>Jim Carrey Memory Game </h1>
-      <Scoreboard score={score} bestScore={bestScore} />
-      <Gameboard movieCharacters={movieCharacters} onClick={handleCardClick} />
+      <div className="header-and-board">
+        <h1>Jim Carrey Memory Game </h1>
+        <Scoreboard score={score} bestScore={bestScore} />
+      </div>
+      <Gameboard
+        gameOverStatus={gameOverStatus}
+        movieCharacters={movieCharacters}
+        onClick={handleCardClick}
+      />
       <GameOver status={gameOverStatus} onClick={handleGameRestart} />
     </main>
   );
