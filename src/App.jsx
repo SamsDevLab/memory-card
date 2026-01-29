@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
+import soundEffect from "./assets/alrighty-then.mp3";
 import movieCharactersObjs from "./data";
 import Scoreboard from "./components/Scoreboard";
 import Gameboard from "./components/Gameboard";
@@ -28,12 +29,7 @@ function App() {
         const response = await fetch(
           `https://api.giphy.com/v1/gifs?api_key=${apiKey}&ids=${idStr}`,
         );
-        if (response.status === 429) {
-          console.error("Too many API calls at this time, using fallback");
-          return "src/assets/mask-api-error.png";
-        } else {
-          return response.json();
-        }
+        return response.json();
       } catch (error) {
         console.error(error);
       }
@@ -95,8 +91,13 @@ function App() {
     return arr;
   };
 
+  const callSoundEffect = () => {
+    new Audio(soundEffect).play();
+  };
+
   function handleCardClick(characterProfile) {
     if (characterProfile.clicked === true) {
+      callSoundEffect();
       setGameOverStatus(true);
     } else {
       const updatedArr = updateTrueValues(characterProfile);
