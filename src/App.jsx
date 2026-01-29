@@ -36,23 +36,16 @@ function App() {
     })();
 
     const completeArr = fetchedData.then((result) => {
-      if (typeof result === "string") {
-        const newArr = movieCharactersObjs.map(
-          (character) => (character.image = result),
-        );
-        setMovieCharacters(newArr);
-      } else {
-        const fetchedGifs = result.data;
-        const newArr = movieCharactersObjs.map((character) => {
-          fetchedGifs.forEach((gif) => {
-            if (character.id === gif.id) {
-              character.image = gif.images.original_still.url;
-            }
-          });
-          return character;
+      const fetchedGifs = result.data;
+      const newArr = movieCharactersObjs.map((character) => {
+        fetchedGifs.forEach((gif) => {
+          if (character.id === gif.id) {
+            character.image = gif.images.original_still.url;
+          }
         });
-        return newArr;
-      }
+        return character;
+      });
+      return newArr;
     });
     completeArr.then((array) => setMovieCharacters(array));
   }, []);
