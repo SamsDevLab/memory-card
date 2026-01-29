@@ -15,8 +15,8 @@ const movieCharactersObjs = [
   },
   {
     id: "5WfSf7cVfknuoht5Ik",
-    name: "Ace Ventura, Pet Detective",
-    bio: "Flamboyant, eccentric, Miami-based private detective specializing in the retrieval of missing animalse with stress",
+    name: "Ace Ventura",
+    bio: "Flamboyant, eccentric, Miami-based private detective specializing in the retrieval of missing animals with stress",
     image: null,
     clicked: false,
   },
