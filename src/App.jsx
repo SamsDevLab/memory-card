@@ -14,28 +14,52 @@ function App() {
   const [gameOverStatus, setGameOverStatus] = useState(false);
   const [bestScore, setBestScore] = useState(0);
 
-  // console.log(movieCharacters);
-
-  // Commented out when maxed out on API requests:
   useEffect(() => {
     const apiKey = "NIXqVHbCyD2vlaPwIj5ivAPp5IbUJHxl";
-    const newCharacterArr = movieCharactersObjs.map(async (character) => {
+
+    const idStr = movieCharactersObjs
+      .map((character) => {
+        return character.id;
+      })
+      .join(",");
+
+    const fetchedData = (async () => {
       try {
         const response = await fetch(
-          `https://api.giphy.com/v1/gifs/${character.id}?api_key=${apiKey}`,
-        ).then((result) => result.json());
-        const newImage = response.data.images.original_still.url;
-        return { ...character, image: newImage };
-      } catch (error) {
-        console.error(
-          "Too many API calls at this time, using fallback:",
-          error,
+          `https://api.giphy.com/v1/gifs?api_key=${apiKey}&ids=${idStr}`,
         );
-        return { ...character, image: "src/assets/mask-api-error.png" };
+        if (response.status === 429) {
+          console.error("Too many API calls at this time, using fallback");
+          return "src/assets/mask-api-error.png";
+        } else {
+          return response.json();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+
+    const completeArr = fetchedData.then((result) => {
+      if (typeof result === "string") {
+        const newArr = movieCharactersObjs.map(
+          (character) => (character.image = result),
+        );
+        setMovieCharacters(newArr);
+      } else {
+        const fetchedGifs = result.data;
+        const newArr = movieCharactersObjs.map((character) => {
+          fetchedGifs.forEach((gif) => {
+            if (character.id === gif.id) {
+              character.image = gif.images.original_still.url;
+            }
+          });
+          return character;
+        });
+        return newArr;
       }
     });
-    Promise.all(newCharacterArr).then((results) => setMovieCharacters(results));
-  }, [bestScore]); //
+    completeArr.then((array) => setMovieCharacters(array));
+  }, []);
 
   const updateScore = () => {
     scoreKeeper.current = scoreKeeper.current + 1;
