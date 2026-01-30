@@ -2,7 +2,7 @@ const movieCharactersObjs = [
   {
     id: "m7FO0p9hTc59e",
     name: "Stanley Ipkiss",
-    bio: "Shy, unlucky, bank clerk who transforms into a chaotic, green-faced, cartoonish trickster when he puts on a magical mask",
+    bio: "Shy bank clerk who transforms into a chaotic, green-faced, cartoonish trickster when he puts on a magical mask",
     image: null,
     clicked: false,
   },
@@ -58,14 +58,14 @@ const movieCharactersObjs = [
   {
     id: "bN7fr2dGqyZuU",
     name: "Fire Marshal Bill",
-    bio: "Accident-prone fire safety inspector who inspects homes for fire hazards, often causing more destruction with his well-meaning but disastrous attempts to demonstrate fire safety",
+    bio: "Accident-prone fire safety inspector, often causing more destruction with his well-meaning but disastrous attempts to demonstrate fire safety",
     image: null,
     clicked: false,
   },
   {
     id: "u982SaFuktUhG",
     name: "Truman Burbank",
-    bio: "Salesman whose entire life has been a massive reality TV show, broadcast globally without his knowledge. Gradually uncovers the deception and attempts to escape his artificial world",
+    bio: "Salesman whose entire life has been a massive reality TV show. Uncovers the deception and attempts to escape his artificial world",
     image: null,
     clicked: false,
   },
