@@ -1,8 +1,8 @@
-function GameOver({ status, onClick }) {
+function GameOver({ score, status, onClick }) {
   if (status === true) {
     return (
       <dialog className="modal show">
-        <h3>Game Over</h3>
+        <h3>{score === 10 ? "You Won!" : "Game Over"}</h3>
         <button onClick={onClick}>Restart</button>
       </dialog>
     );
