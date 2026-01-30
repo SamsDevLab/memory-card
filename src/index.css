@@ -11,14 +11,6 @@
   font: inherit;
 }
 
-#root {
-  min-height: 100vh;
-  background-color: #0b0f2e;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 h1,
 h2,
 h3,
@@ -31,7 +23,7 @@ h6 {
 h1 {
   font-family: "Audiowide", system-ui, sans-serif;
   color: #39ff14;
-  font-size: 3rem;
+  font-size: 2.75rem;
 }
 
 h2,
@@ -40,6 +32,11 @@ h4,
 h5,
 h6 {
   font-family: "Inter 18pt", system-ui, sans-serif;
+}
+
+h2 {
+  color: #e6e8f2;
+  font-size: 1.25rem;
 }
 
 p,
@@ -71,9 +68,6 @@ select {
   src:
     url("./memory-card-fonts/Audiowide-Regular.woff2") format("woff2"),
     url("./memory-card-fonts/Audiowide-Regular.woff") format("woff");
-  /* font-weight: normal;
-  font-style: normal;
-  font-display: swap; */
 }
 
 @font-face {
@@ -81,7 +75,4 @@ select {
   src:
     url("./memory-card-fonts/Inter18pt-Regular.woff2") format("woff2"),
     url("./memory-card-fonts/Inter18pt-Regular.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }
