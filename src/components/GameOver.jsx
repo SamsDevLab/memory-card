@@ -6,7 +6,7 @@ function GameOver({ score, status, onClick }) {
         <button onClick={onClick}>Restart</button>
       </dialog>
     );
-  }
+  } else return null;
 }
 
 export default GameOver;
