@@ -12,6 +12,7 @@ function App() {
   const [movieCharacters, setMovieCharacters] = useState([]);
   const [score, setCurrentScore] = useState(0);
   const scoreKeeper = useRef(0);
+  const objArrWithImages = useRef([]);
   const [gameOverStatus, setGameOverStatus] = useState(false);
   const [bestScore, setBestScore] = useState(0);
 
@@ -41,12 +42,19 @@ function App() {
         const matchedGif = fetchedGifs.find((gif) => gif.id === character.id);
 
         if (matchedGif !== undefined) {
-          return { ...character, image: matchedGif.images.original_still.url };
+          return {
+            ...character,
+            image: matchedGif.images.original_still.url,
+          };
         } else return { ...character };
       });
       return newArr;
     });
-    completeArr.then((newArr) => setMovieCharacters(newArr));
+
+    completeArr.then((newArr) => {
+      objArrWithImages.current = newArr;
+      setMovieCharacters(newArr);
+    });
   }, []);
 
   const updateScore = () => {
@@ -62,59 +70,53 @@ function App() {
     const updatedArr = movieCharacters.map((character) => {
       if (character.id === characterProfile.id) {
         return { ...character, clicked: true };
-      }
-
-      return { ...character };
+      } else return { ...character };
     });
 
     return updatedArr;
   };
 
   const shuffleCards = (arr) => {
-    let currentIndex = arr.length,
+    const shuffledArr = [...arr];
+    let currentIndex = shuffledArr.length,
       randomIndex;
 
     while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
-      [arr[currentIndex], arr[randomIndex]] = [
-        arr[randomIndex],
-        arr[currentIndex],
+      [shuffledArr[currentIndex], shuffledArr[randomIndex]] = [
+        shuffledArr[randomIndex],
+        shuffledArr[currentIndex],
       ];
     }
 
-    return arr;
+    return shuffledArr;
   };
 
   const callSoundEffect = () => {
     new Audio(soundEffect).play();
   };
 
-  // Function is both side effects mixed with logic (doing too much)
   function handleCardClick(characterProfile) {
     if (characterProfile.clicked === true) {
       callSoundEffect();
       setGameOverStatus(true);
     } else {
-      // Mutating state here:
       const updatedArr = updateTrueValues(characterProfile);
       const shuffledMovieCharacters = shuffleCards(updatedArr);
       updateScore();
 
       setMovieCharacters(shuffledMovieCharacters);
-      setMovieCharacters(updatedArr);
     }
   }
 
   function handleGameRestart() {
+    if (score > bestScore) setBestScore(score);
     setCurrentScore(0);
     scoreKeeper.current = 0;
-    setMovieCharacters(movieCharactersObjs);
+    setMovieCharacters(objArrWithImages.current);
     setGameOverStatus(false);
-
-    // You're overwriting the high score every time
-    setBestScore(score);
   }
 
   return (
