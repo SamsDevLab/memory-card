@@ -1,4 +1,4 @@
-import "./App.css";
+import "./stylesheets/app.css";
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -9,7 +9,7 @@ import Gameboard from "./components/Gameboard";
 import GameOver from "./components/GameOver";
 
 function App() {
-  const [movieCharacters, setMovieCharacters] = useState(movieCharactersObjs);
+  const [movieCharacters, setMovieCharacters] = useState([]);
   const [score, setCurrentScore] = useState(0);
   const scoreKeeper = useRef(0);
   const [gameOverStatus, setGameOverStatus] = useState(false);
@@ -38,16 +38,15 @@ function App() {
     const completeArr = fetchedData.then((result) => {
       const fetchedGifs = result.data;
       const newArr = movieCharactersObjs.map((character) => {
-        fetchedGifs.forEach((gif) => {
-          if (character.id === gif.id) {
-            character.image = gif.images.original_still.url;
-          }
-        });
-        return character;
+        const matchedGif = fetchedGifs.find((gif) => gif.id === character.id);
+
+        if (matchedGif !== undefined) {
+          return { ...character, image: matchedGif.images.original_still.url };
+        } else return { ...character };
       });
       return newArr;
     });
-    completeArr.then((array) => setMovieCharacters(array));
+    completeArr.then((newArr) => setMovieCharacters(newArr));
   }, []);
 
   const updateScore = () => {
@@ -92,11 +91,13 @@ function App() {
     new Audio(soundEffect).play();
   };
 
+  // Function is both side effects mixed with logic (doing too much)
   function handleCardClick(characterProfile) {
     if (characterProfile.clicked === true) {
       callSoundEffect();
       setGameOverStatus(true);
     } else {
+      // Mutating state here:
       const updatedArr = updateTrueValues(characterProfile);
       const shuffledMovieCharacters = shuffleCards(updatedArr);
       updateScore();
@@ -111,6 +112,8 @@ function App() {
     scoreKeeper.current = 0;
     setMovieCharacters(movieCharactersObjs);
     setGameOverStatus(false);
+
+    // You're overwriting the high score every time
     setBestScore(score);
   }
 
