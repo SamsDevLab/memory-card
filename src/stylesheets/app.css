@@ -32,7 +32,7 @@
   gap: 1.5rem;
   background: #1a1f4a;
   position: absolute;
-  top: 18%;
+  top: 20%;
   left: 25.75%;
   min-height: 50%;
   min-width: 45%;
@@ -96,5 +96,21 @@
 
   .modal {
     left: 18%;
+  }
+}
+
+@media (max-width: 500px) {
+  .modal {
+    left: 22%;
+    max-height: 10rem;
+  }
+
+  .modal h3 {
+    font-size: 2rem;
+  }
+
+  .modal button {
+    font-size: 1.25rem;
+    padding: 0.5rem;
   }
 }
