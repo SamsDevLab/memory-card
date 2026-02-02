@@ -11,10 +11,10 @@ import GameOver from "./components/GameOver";
 function App() {
   const [movieCharacters, setMovieCharacters] = useState([]);
   const [score, setCurrentScore] = useState(0);
-  const scoreKeeper = useRef(0);
-  const objArrWithImages = useRef([]);
   const [gameOverStatus, setGameOverStatus] = useState(false);
   const [bestScore, setBestScore] = useState(0);
+  const scoreKeeper = useRef(0);
+  const objArrWithImages = useRef([]);
 
   useEffect(() => {
     const apiKey = "NIXqVHbCyD2vlaPwIj5ivAPp5IbUJHxl";
